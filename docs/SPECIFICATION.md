@@ -19,6 +19,7 @@ Decided by the owner on 2026-11-13, with `flight` [SPEC-FLIGHT-11] and [SPEC-FLI
   4. a 64-byte reply TLP, two bits per clock, Pico driving.
   Requests and replies are AbstractX 64-byte TLPs with the CRC32 footer. Channels separate registers, serial and events; a reply carries the tag of the request it answers.
   A Tang board running `abstractx-fpga` must accept the same exchange, so either companion fits the same host.
+  The link also runs as plain SPI (owner, 2026-11-13, for a Pi Zero 2 W host): IO0 is MOSI, IO1 is MISO, every phase one bit per clock, same sequence; the status byte goes out on MISO during the command byte.
 * **Why**: the dummy bytes cover the direction change on IO0/IO1 and the command decode; the status byte tells the host what is waiting before the reply arrives.
 * **Verified by**: `host-tests`, `board-bringup`
 * **Implementation Target**: `src/`
