@@ -1,6 +1,8 @@
 # TODO
 
-- [ ] Build: CMake with the Pico SDK for `pico2` / `pico2_w`, taking `ABSTRACTX_PATH` and `PIO2_PATH` ([SPEC-OFFLOAD-06]).
+- [x] Build: CMake with the Pico SDK for `pico2` / `pico2_w`, taking `ABSTRACTX_PATH` ([SPEC-OFFLOAD-07]).
+- [ ] AbstractX: an RP2350 target without Wi-Fi, so the HAL can be used here ([SPEC-OFFLOAD-07]).
+- [ ] Take `PIO2_PATH` once the first `pio2` program is built.
 - [ ] Move ESC passthrough, 4-way and MSP from `rt-fc-offloader/firmware` ([SPEC-OFFLOAD-06]); check RP2040 code on the RP2350.
 - [ ] Compare `rt-fc-offloader`'s `dshot.pio` / `esc_pio_uart.pio` (ran on hardware) with `pio2`'s `dshot_bidir.pio` / `esc_serial.pio`; keep `pio2`'s.
 - [ ] NeoPixel and 6-channel PWM-decode programs in `pio2`.

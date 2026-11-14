@@ -1,0 +1,23 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "pico2_w",
+      "displayName": "Pico 2 W (RP2350), Wi-Fi unused",
+      "binaryDir": "${sourceDir}/build/pico2_w",
+      "generator": "Unix Makefiles",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release", "PICO_BOARD": "pico2_w" }
+    },
+    {
+      "name": "pico2",
+      "displayName": "Pico 2 (RP2350)",
+      "binaryDir": "${sourceDir}/build/pico2",
+      "generator": "Unix Makefiles",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release", "PICO_BOARD": "pico2" }
+    }
+  ],
+  "buildPresets": [
+    { "name": "pico2_w", "configurePreset": "pico2_w" },
+    { "name": "pico2", "configurePreset": "pico2" }
+  ]
+}

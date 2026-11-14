@@ -53,3 +53,15 @@ Decided by the owner on 2026-11-13, with `flight` [SPEC-FLIGHT-11] and [SPEC-FLI
 * **Verified by**: `spec-change-review`
 * **Implementation Target**: `CMakeLists.txt`
 * **Not implemented yet**: no build; the move from `rt-fc-offloader` has not started.
+
+### `[SPEC-OFFLOAD-07]` Firmware Build: Pico SDK, No Wi-Fi Code
+* **Requirement**: `CMakeLists.txt` builds the firmware for `PICO_BOARD` `pico2_w` (default) or `pico2`, `PICO_PLATFORM` `rp2350-arm-s`, with presets of the same names.
+  * The Pico SDK comes from `PICO_SDK_PATH` (cache or environment), else `~/.tools/pico-sdk`; the compiler from AbstractX's `cmake/toolchains/arm-none-eabi.cmake` (AbstractX [SPEC-BUILD-01]).
+  * `ABSTRACTX_PATH` is required and passed in (cache or environment); AbstractX is added as a subproject (AbstractX [SPEC-BUILD-04]) and the firmware links `abstractx_core`.
+  * The firmware does not link `abstractx_target_pico2w`, which starts Wi-Fi on Core 0 (AbstractX [SPEC-PICO-CORE-01]), nor any `pico_cyw43_*` library. The linked ELF contains no `cyw43_` symbol.
+  * Output: `.elf` and `.uf2`. C++ is built with `-fno-exceptions -fno-rtti` (AbstractX [SPEC-BUILD-03]).
+* **Why**: [SPEC-OFFLOAD-01] (Wi-Fi off) and [SPEC-OFFLOAD-06] (AbstractX passed in, not copied). The board on the bench is a Pico 2 W.
+* **Verified by**: `firmware-build`
+* **Implementation Target**: `CMakeLists.txt`, `CMakePresets.json`, `src/main.cpp`
+* **Not implemented yet**: AbstractX has no RP2350 target without Wi-Fi, so none of its Pico HAL is used; that needs a change in AbstractX. `PIO2_PATH` is not used until the first `pio2` program is built.
+
